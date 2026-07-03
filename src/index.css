@@ -1,0 +1,14 @@
+@import "tailwindcss";
+#resultGrid {
+  background: #000000;
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(95, 83, 189, 1) 47%,
+    rgba(5, 27, 94, 1) 75%,
+    rgba(51, 50, 45, 1) 96%
+  );
+}
+#title{
+  background: linear-gradient(transparent, black);
+}
