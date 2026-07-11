@@ -11,13 +11,13 @@ jobs:
 
         steps:
             - name: Download Repository
-            uses: actions/chekout@v4
+              uses: actions/checkout@v4
             
             - name: Create SSH key
-            run: |
+              run: |
                 echo "${{ secrets.SSH_KEY }}" > key.pem
                 chmod 600 key.pem
 
-            -name: log in to EC2
-            run: |
-                ssh -i key.pem ${{secrets.USER}}@${{secrets.HOST}} "cd ~/redux && git pull && docker compose down && docker compose up --build -d"
+            - name: log in to EC2
+              run: |
+                ssh -o StrictHostKeyChecking=no -i  key.pem ${{secrets.USER}}@${{secrets.HOST}} "cd ~/redux && git pull && docker compose down && docker compose up --build -d"
