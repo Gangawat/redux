@@ -20,4 +20,4 @@ jobs:
 
             - name: log in to redux EC2
               run: |
-                ssh -o StrictHostKeyChecking=no -i key.pem ${{secrets.USER}}@${{secrets.HOST}} "cd ~/redux && git pull && docker compose down && docker compose up --build -d"
+                ssh -o StrictHostKeyChecking=no -i key.pem ${{secrets.USER}}@${{secrets.HOST}} "cd ~/redux && git pull && sudo docker compose down && sudo docker compose up --build -d"
