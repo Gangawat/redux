@@ -1,0 +1,15 @@
+name: Deploy Website
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Download Repository
+            uses: actions/chekout@v4
+            
