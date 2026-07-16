@@ -1,8 +1,7 @@
 services:
   web:
-    build: .
-    image: dws-react:v1
+    image: 468282556717.dkr.ecr.ap-south-1.amazonaws.com/dws-react:v1
     container_name: dws-react
     restart: unless-stopped
     ports:
-      - "8080:80"
+      - "8080:80" 

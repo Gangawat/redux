@@ -12,6 +12,29 @@ jobs:
         steps:
             - name: Download Repository
               uses: actions/checkout@v4
+
+            - name: configure AWS credentials
+              uses: aws-actions/configure-aws-credentials@v4
+              with:
+                aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
+                aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+                aws-region: ${{secrets.AWS_REGION}}
+
+            - name: login to amazon ecr
+              id: login-ecr
+              uses: aws-actions/amazon-ecr-login@v2
+
+            - name: build docker image
+              run: |
+                docker build -t dws-react:v1 .
+            
+            - name: tag docker image
+              run: |
+                docker tag dws-react:v1 468282556717.dkr.ecr.ap-south-1.amazonaws.com/dws-react:v1
+            
+            - name: push docker image
+              run: |
+                docker push 468282556717.dkr.ecr.ap-south-1.amazonaws.com/dws-react:v1
             
             - name: Create SSH key
               run: |
@@ -20,4 +43,4 @@ jobs:
 
             - name: log in to redux EC2
               run: |
-                ssh -o StrictHostKeyChecking=no -i key.pem ${{secrets.USER}}@${{secrets.HOST}} "cd ~/redux && git pull && sudo docker compose down && sudo docker compose up --build -d"
+                ssh -o StrictHostKeyChecking=no -i key.pem ${{secrets.USER}}@${{secrets.HOST}} "cd ~/redux && sudo docker compose down && sudo docker pull 468282556717.dkr.ecr.ap-south-1.amazonaws.com/dws-react:v1 && sudo docker compose up -d"
