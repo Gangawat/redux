@@ -1,6 +1,6 @@
 FROM nginx:latest
 
-COPY dist/assets /usr/share/nginx/html/
+COPY dist/ /usr/share/nginx/html/
 
 EXPOSE 80
 
